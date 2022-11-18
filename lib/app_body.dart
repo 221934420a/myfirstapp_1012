@@ -24,15 +24,25 @@ class SnackBarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
+    TextEditingController emailController = TextEditingController();
+
+    return Column(
+
+        children: <Widget>[
+      TextField(
+          controller: emailController,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Enter text',
+          )),
+      ElevatedButton(
         onPressed: () {
           final snackBar = SnackBar(
-            content: const Text('Yay! A SnackBar!'),
+            content: Text(emailController.text),
             action: SnackBarAction(
               label: 'Undo',
               onPressed: () {
-                // Some code to undo the change.
+                emailController.clear();
               },
             ),
           );
@@ -41,8 +51,8 @@ class SnackBarPage extends StatelessWidget {
           // and use it to show a SnackBar.
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
-        child: const Text('Show SnackBar'),
+        child: const Text('Show text'),
       ),
-    );
+    ]);
   }
 }
